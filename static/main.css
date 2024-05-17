@@ -42,3 +42,6 @@ code {
 .small {
     font-size: 0.75rem;
 }
+.main {
+    align-items: center;
+}
