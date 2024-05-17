@@ -1,0 +1,14 @@
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+<body>
+    {% include 'navbar.html' %}
+    <p>Today's date is {{ get_date() }}</p>
+    {% for playlist in playlists %}
+        <h4>{{ playlist }}</h4>
+    {% endfor %}
+    <button onclick="alert('Put these foolish ambitions to rest.')">List Playlists</button>
+</body>
+
+</html>

@@ -20,9 +20,8 @@ code {
     height: 40vmin;
     pointer-events: none;
 }
-
 .App-header {
-    background-color: #282c34;
+    background-color: blue;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -42,4 +41,7 @@ code {
 
 .small {
     font-size: 0.75rem;
+}
+.main {
+    align-items: center;
 }
