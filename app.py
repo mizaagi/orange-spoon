@@ -1,14 +1,23 @@
 from flask import Flask, render_template, request
 from datetime import datetime
+import json
 
 app = Flask(__name__)
+new_song = ""
 
 @app.route("/", methods = ["GET","POST"])
+@app.route("/home", methods = ["GET", "POST"])
 def home_page():
+    global line
     if request.method == "POST":
         audioFile = request.form["audio"]
-        
-    return render_template("index.html", title="Home")
+        with open("AllSongs.txt", 'a') as f:
+            f.write(audioFile)
+
+        with open("AllSongs.txt", 'r') as f:
+            line = f.readline()
+
+    return render_template("index.html", title="Home", line1=new_song, upload_song=upload_song)
 
 @app.route("/playlists")
 def playlists():
@@ -27,3 +36,8 @@ def new_playlist():
                             get_date=get_date,
                             list_playlists=list_playlists,
                             playlists=list_playlists())
+
+def upload_song():
+    with open("AllSongs.txt", "a") as f:
+        f.write(new_song)
+    return f"Your song {new_song} was uploaded."
