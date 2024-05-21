@@ -5,19 +5,26 @@ import json
 app = Flask(__name__)
 new_song = ""
 
+#for
+# for (int lcv = 0; lcv <= 500; lcv++) {Console.WriteLine}
 @app.route("/", methods = ["GET","POST"])
 @app.route("/home", methods = ["GET", "POST"])
 def home_page():
-    global line
+    global new_song
     if request.method == "POST":
         audioFile = request.form["audio"]
-        with open("AllSongs.txt", 'a') as f:
-            f.write(audioFile)
+        new_song = audioFile
+        return render_template("index.html", 
+                               title="Home", 
+                               new_song=new_song, 
+                               upload_song=upload_song, 
+                               update_song=update_song)
 
-        with open("AllSongs.txt", 'r') as f:
-            line = f.readline()
-
-    return render_template("index.html", title="Home", line1=new_song, upload_song=upload_song)
+    return render_template("index.html", 
+                           title="Home", 
+                           new_song=new_song, 
+                           upload_song=upload_song, 
+                           update_song=update_song)
 
 @app.route("/playlists")
 def playlists():
@@ -40,4 +47,10 @@ def new_playlist():
 def upload_song():
     with open("AllSongs.txt", "a") as f:
         f.write(new_song)
-    return f"Your song {new_song} was uploaded."
+    if new_song:
+        return f"Your song {new_song} was uploaded."
+    return ""
+
+def update_song(songname):
+    global new_song
+    new_song = songname
