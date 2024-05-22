@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
 from datetime import datetime
-import json
+import json, os
 
 app = Flask(__name__)
 new_song = ""
@@ -10,10 +11,13 @@ new_song = ""
 @app.route("/", methods = ["GET","POST"])
 @app.route("/home", methods = ["GET", "POST"])
 def home_page():
-    global new_song
     if request.method == "POST":
         audioFile = request.form["audio"]
-        new_song = audioFile
+        fileName = secure_filename(audioFile.filename)
+        upload_song(fileName) # Updates AllSongs.txt with filename
+        filename = secure_filename(audioFile.filename)
+        audioFile.save(os.path.join(app.config['audioFiles/'], filename))
+        
         return render_template("index.html", 
                                title="Home", 
                                new_song=new_song, 
@@ -44,10 +48,11 @@ def new_playlist():
                             list_playlists=list_playlists,
                             playlists=list_playlists())
 
-def upload_song():
+def upload_song(name):
+    new_song = name
     with open("AllSongs.txt", "a") as f:
-        f.write(new_song)
-    if new_song:
+        f.write(new_song + "\n")
+    if new_song != "":
         return f"Your song {new_song} was uploaded."
     return ""
 

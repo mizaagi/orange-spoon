@@ -1,6 +1,7 @@
-https://orange-spoon-w6wvx7g75p4f9jq-5000.app.github.dev/
-https://laughing-halibut-wjjp7qxwwjqhwxg-5000.app.github.dev/
-
-
-USE THIS:
 https://obscure-palm-tree-56wv5qxqrwx3vvg6-5000.app.github.dev/
+
+
+
+filename = secure_filename(file.filename)
+file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+return redirect(url_for('uploaded_file', filename=filename))
