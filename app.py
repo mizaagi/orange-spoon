@@ -11,11 +11,22 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def file_upload():
     if request.method == "POST":
+        playlist = "uploadedSongs" # Sets default "playlist" as a simple uploadedSongs folder, not a playlist at all
         file = request.files['file']
-        file.save(f"audioFiles/{file.filename}")
-        return render_template("fileupload.html", title="File Upload", 
-                               message="Uploaded file successfully!")
+        playlist = request.files['playlistname']
+        if file.filename.endswith(('.mp3', '.ogg', '.wav', '.flac', '.3gp')):
+            file.save(f"audioFiles/{playlist}/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
+            return render_template("fileupload.html", title="File Upload", 
+                               message=f"Uploaded file {file.filename} successfully!")
+        else:
+            return render_template("fileupload.html", title="File Upload", 
+                               message=f"Failed to upload {file.filename}. Please try again with a file with a supported format.")
     return render_template("fileupload.html", title="File Upload")
+
+@app.route("/play")
+def play():
+    pass
+
 
 @app.route("/playlists")
 def playlists():
