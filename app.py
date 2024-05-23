@@ -4,31 +4,18 @@ from datetime import datetime
 import json, os
 
 app = Flask(__name__)
-new_song = ""
 
-#for
-# for (int lcv = 0; lcv <= 500; lcv++) {Console.WriteLine}
-@app.route("/", methods = ["GET","POST"])
-@app.route("/home", methods = ["GET", "POST"])
-def home_page():
+
+
+
+@app.route("/", methods=['GET', 'POST'])
+def file_upload():
     if request.method == "POST":
-        audioFile = request.form["audio"]
-        fileName = secure_filename(audioFile.filename)
-        upload_song(fileName) # Updates AllSongs.txt with filename
-        filename = secure_filename(audioFile.filename)
-        audioFile.save(os.path.join(app.config['audioFiles/'], filename))
-        
-        return render_template("index.html", 
-                               title="Home", 
-                               new_song=new_song, 
-                               upload_song=upload_song, 
-                               update_song=update_song)
-
-    return render_template("index.html", 
-                           title="Home", 
-                           new_song=new_song, 
-                           upload_song=upload_song, 
-                           update_song=update_song)
+        file = request.files['file']
+        file.save(f"audioFiles/{file.filename}")
+        return render_template("fileupload.html", title="File Upload", 
+                               message="Uploaded file successfully!")
+    return render_template("fileupload.html", title="File Upload")
 
 @app.route("/playlists")
 def playlists():
@@ -47,15 +34,3 @@ def new_playlist():
                             get_date=get_date,
                             list_playlists=list_playlists,
                             playlists=list_playlists())
-
-def upload_song(name):
-    new_song = name
-    with open("AllSongs.txt", "a") as f:
-        f.write(new_song + "\n")
-    if new_song != "":
-        return f"Your song {new_song} was uploaded."
-    return ""
-
-def update_song(songname):
-    global new_song
-    new_song = songname

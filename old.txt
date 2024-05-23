@@ -1,0 +1,26 @@
+new_song = ""
+"""
+for
+ for (int lcv = 0; lcv <= 500; lcv++) {Console.WriteLine}
+ @app.route("/", methods = ["GET","POST"])
+ @app.route("/home", methods = ["GET", "POST"])
+ def home_page():
+     if request.method == "POST":
+         audioFile = request.form["audio"]
+         fileName = secure_filename(audioFile.filename)
+         upload_song(fileName) # Updates AllSongs.txt with filename
+         filename = secure_filename(audioFile.filename)
+         audioFile.save(os.path.join(app.config['audioFiles/'], filename))
+        
+         return render_template("index.html", 
+                                title="Home", 
+                                new_song=new_song, 
+                                upload_song=upload_song, 
+                                update_song=update_song)
+
+     return render_template("index.html", 
+                            title="Home", 
+                            new_song=new_song, 
+                            upload_song=upload_song, 
+                            update_song=update_song)
+"""
