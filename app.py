@@ -13,7 +13,10 @@ def file_upload():
     if request.method == "POST":
         playlist = "uploadedSongs" # Sets default "playlist" as a simple uploadedSongs folder, not a playlist at all
         file = request.files['file']
-        playlist = request.files['playlistname']
+        try:
+            playlist = request.files['playlistname']
+        except:
+            playlist = "uploadedSongs"
         if file.filename.endswith(('.mp3', '.ogg', '.wav', '.flac', '.3gp')):
             file.save(f"audioFiles/{playlist}/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
             return render_template("fileupload.html", title="File Upload", 
