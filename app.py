@@ -13,14 +13,11 @@ def file_upload():
     if request.method == "POST":
         playlist = "uploadedSongs" # Sets default "playlist" as a simple uploadedSongs folder, not a playlist at all
         file = request.files['file']
-        try:
-            playlist = request.files['playlistname']
-        except:
-            playlist = "uploadedSongs"
+        playlist = request.form['playlistname']
         if file.filename.endswith(('.mp3', '.ogg', '.wav', '.flac', '.3gp')):
             file.save(f"audioFiles/{playlist}/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
             return render_template("fileupload.html", title="File Upload", 
-                               message=f"Uploaded file {file.filename} successfully!")
+                               message=f"Uploaded file {file.filename} to {playlist} successfully!")
         else:
             return render_template("fileupload.html", title="File Upload", 
                                message=f"Failed to upload {file.filename}. Please try again with a file with a supported format.")
@@ -41,10 +38,14 @@ def get_date():
 def list_playlists():
     return ["Example Playlist 1", "Example Playlist 2", "Example Playlist 3"]
 
-@app.route("/new_playlist")
-def new_playlist():
+def new_playlist(playlist_name, contents=[]):
+    """
     return render_template("new_playlist.html",
                             title="Playlists",
                             get_date=get_date,
                             list_playlists=list_playlists,
                             playlists=list_playlists())
+                            """
+    playlist = {'name':playlist_name, 'contents':contents}
+    # print(playlist['name']) --> playlist_name
+    # print(playlist['contents']) --> []

@@ -45,6 +45,9 @@ code {
 .main {
     align-items: center;
 }
-.container {
-
+.lower {
+    align-items: bottom;
+}
+.upper {
+    align-items: top;
 }

@@ -14,12 +14,11 @@
         {% endif %}
 
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" id="file" accept="audio/*">
-            <input type="submit" value="Upload">
-        </form>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="text" name="text" id="playlistname" accept="*">
-            <input type="submit" value="Upload">
+
+            <input type="file" name="file" id="file" accept="audio/*" class="upper">
+            <label>Enter Name for NEW playlist</label class="upper">
+            <input type="text" name="playlistname" id="playlistname" accept="*" class="lower">
+            <input type="submit" value="Upload" class="lower">
         </form>
     </div>
 </body>
