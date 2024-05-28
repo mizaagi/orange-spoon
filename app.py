@@ -17,7 +17,7 @@ def file_upload():
         if file.filename.endswith(('.mp3', '.ogg', '.wav', '.flac', '.3gp')):
             file.save(f"audioFiles/{playlist}/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
             return render_template("fileupload.html", title="File Upload", 
-                               message=f"Uploaded file {file.filename} to {playlist} successfully!")
+                               message=f"Uploaded file {file.filename} to {playlist} successfully!", filename=f"audioFiles/{playlist}/{file.filename}")
         else:
             return render_template("fileupload.html", title="File Upload", 
                                message=f"Failed to upload {file.filename}. Please try again with a file with a supported format.")
