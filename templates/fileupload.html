@@ -13,12 +13,14 @@
         {% endif %}
 
         <form method="POST" enctype="multipart/form-data">
-
             <input type="file" name="file" id="file" accept="audio/*" class="upper">
             <label>Enter Name for playlist</label class="upper">
             <input type="text" name="playlistname" id="playlistname" accept="*" class="lower">
             <input type="submit" value="Upload" class="lower">
         </form>
+            {% for line in filetxt %}
+            <p>{{line}}</p>
+            {% endfor %}
     </div>
     <audio controls>
         <source src="{{filename}}">

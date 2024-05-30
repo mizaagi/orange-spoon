@@ -14,14 +14,26 @@ def file_upload():
         playlist = "uploadedSongs" # Sets default "playlist" as a simple uploadedSongs folder, not a playlist at all
         file = request.files['file']
         playlist = request.form['playlistname']
+        filetxt = ""
         if file.filename.endswith(('.mp3', '.ogg', '.wav', '.flac', '.3gp')):
-            file.save(f"audioFiles/{playlist}/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
+            file.save(f"audioFiles/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
+            with open(f"playlists/{playlist}.txt", "a") as playlisttxt:
+                playlisttxt.write(file.filename+"\n")
+            with open(f"playlists/{playlist}.txt", "r") as playlisttxt:
+                filetxt = playlisttxt.read()
             return render_template("fileupload.html", title="File Upload", 
-                               message=f"Uploaded file {file.filename} to {playlist} successfully!", filename=f"audioFiles/{playlist}/{file.filename}")
+                               message=f"Uploaded file {file.filename} to {playlist} successfully!", filename=f"audioFiles/{playlist}/{file.filename}", filetxt=filetxt.split("\n"))
         else:
             return render_template("fileupload.html", title="File Upload", 
                                message=f"Failed to upload {file.filename}. Please try again with a file with a supported format.")
     return render_template("fileupload.html", title="File Upload")
+
+
+
+"""
+open("file.txt", 'a').write("songname.mp3")
+with open("{{playlistname}}" + ".txt", 'a') # {{playlistname}} get the playlist name from the variable assigned as such
+"""
 
 @app.route("/play")
 def play():
@@ -38,14 +50,27 @@ def get_date():
 def list_playlists():
     return ["Example Playlist 1", "Example Playlist 2", "Example Playlist 3"]
 
+"""
 def new_playlist(playlist_name, contents=[]):
-    """
     return render_template("new_playlist.html",
                             title="Playlists",
                             get_date=get_date,
                             list_playlists=list_playlists,
                             playlists=list_playlists())
-                            """
     playlist = {'name':playlist_name, 'contents':contents}
     # print(playlist['name']) --> playlist_name
     # print(playlist['contents']) --> []
+"""
+
+
+# go to /newplaylist
+# today we are making the playlist creation code
+# plan is to open folder file using python
+
+#Why not just a txt file with the file names?
+#That would be easier
+
+
+@app.route("/newplaylist")
+def new_playlist():
+    return render_template("newplaylist.html")
