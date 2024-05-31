@@ -70,7 +70,6 @@ def new_playlist(playlist_name, contents=[]):
 #Why not just a txt file with the file names?
 #That would be easier
 
-
-@app.route("/newplaylist")
-def new_playlist():
-    return render_template("newplaylist.html")
+@app.route("/play")
+def play_music():
+    return render_template("play.html", title="Play")

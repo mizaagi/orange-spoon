@@ -9,23 +9,35 @@
     <div id="container">
         <h1>{{ title }}</h1>
         
-        {% if message %}
-            <h2>{{ message }}</h2>
-        {% endif %}
+
 
         <form method="POST" enctype="multipart/form-data">
             <div class="center">
                 <input type="file" name="file" id="file" accept="audio/*">
-                <label>Enter Name for playlist</label>
-                <div class="lower">
-                    <input type="text" name="playlistname" id="playlistname" accept="*">
-                    <input type="submit" value="Upload">
+                <div class="lower" id="centercenter">
+                    <label class="lower" id="centercenter">Enter name for playlist: </label>
+                    <input type="text" name="playlistname" id="playlistname" accept="*" id="centercenter">
+                    <input type="submit" value="Upload" id="centercenter" onclick="PopUp()">
+                    {% if message %}
+                    <h2>{{ message }}</h2>
+                    {% endif %}
                 </div>
             </div>
         </form>
-            {% for line in filetxt %}
-            <p>{{line}}</p>
-            {% endfor %}
+
+        <dialog id="confirm">
+            <p></p>
+        </dialog>
+
+
+        <!-- <script>
+            let popup = document.getElementById('confirm');
+            function PopUp() {
+                 popup.classList.toggle("show");
+            }
+            
+
+        </script> -->
     </div>
 </body>
 

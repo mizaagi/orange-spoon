@@ -5,6 +5,8 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: black;
+    color: white;
 }
 
 code {
@@ -28,7 +30,7 @@ code {
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .App-link {
@@ -46,12 +48,23 @@ code {
     align-items: center;
 }
 .lower {
-    align-content: center;
+    margin-top: 1%;
+    
 }
 .upper {
     align-items: top;
 }
 .center {
     align-items: center;
+    align-self: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    background-color: rgb(184, 62, 62);    
+    color: black; 
+    .centercenter {
+        margin: 10%;
+    }
+    height: 40%;
+    width: 40%;
 }
 
