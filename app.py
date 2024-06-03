@@ -35,11 +35,6 @@ open("file.txt", 'a').write("songname.mp3")
 with open("{{playlistname}}" + ".txt", 'a') # {{playlistname}} get the playlist name from the variable assigned as such
 """
 
-@app.route("/play")
-def play():
-    pass
-
-
 @app.route("/playlists")
 def playlists():
     return render_template("playlists.html", title="Playlists")
@@ -71,5 +66,6 @@ def new_playlist(playlist_name, contents=[]):
 #That would be easier
 
 @app.route("/play")
-def play_music():
-    return render_template("play.html", title="Play")
+def play():
+    files = os.listdir("audioFiles")
+    return render_template("play.html", title="Play", files=files)

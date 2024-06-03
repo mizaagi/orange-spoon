@@ -59,10 +59,15 @@ code {
     align-self: center;
     margin-left: 25%;
     margin-right: 25%;
-    background-color: rgb(184, 62, 62);    
+    background-color: rgb(184, 62, 62); 
+    border-radius: 5%;   
     color: black; 
+    position: absolute;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    padding: 70px 0;
     .centercenter {
-        margin: 10%;
     }
     height: 40%;
     width: 40%;

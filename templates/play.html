@@ -8,19 +8,13 @@
     {% include 'navbar.html' %}
     <div id="container">
         <h1>{{ title }}</h1>
-        <form method="POST" enctype="multipart/form-data">
-            <div class="center">
-                <input type="file" name="file" id="file" accept="audio/*">
-                <div class="lower" id="centercenter">
-                    <label class="lower" id="centercenter">Enter name for playlist: </label>
-                    <input type="text" name="playlistname" id="playlistname" accept="*" id="centercenter">
-                    <input type="submit" value="Upload" id="centercenter" onclick="PopUp()">
-
-                </div>
-            </div>
-        </form>
-
-
+        <audio controls>
+            <ul>
+                {% for file in files %}
+                <li><source src="{{ file }}"></li>
+                {% endfor %}
+            </ul>
+        </audio>
     </div>
 </body>
 

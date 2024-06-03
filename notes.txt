@@ -9,3 +9,10 @@ return redirect(url_for('uploaded_file', filename=filename))
 {% for line in filetxt %}
 <h5>{{line}}</h5>
 {% endfor %}
+        <ul>
+            {% for file in files %}
+            <!-- For every file, make a list item with a clickable 
+                 link that pops open the filename in an alert box -->
+            <li><a href="#" onclick="popupFilename('{{ file }}')">{{ file }}</a></li>
+            {% endfor %}
+        </ul>
