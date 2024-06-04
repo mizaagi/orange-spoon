@@ -16,10 +16,10 @@ def file_upload():
         playlist = request.form['playlistname']
         filetxt = ""
         if file.filename.endswith(('.mp3', '.ogg', '.wav', '.flac', '.3gp')):
-            file.save(f"audioFiles/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
-            with open(f"playlists/{playlist}.txt", "a") as playlisttxt:
+            file.save(f"static/audioFiles/{file.filename}") # Example: audioFiles/samplePlaylist/goodMusic.mp3
+            with open(f"static/playlists/{playlist}.txt", "a") as playlisttxt:
                 playlisttxt.write(file.filename+"\n")
-            with open(f"playlists/{playlist}.txt", "r") as playlisttxt:
+            with open(f"static/playlists/{playlist}.txt", "r") as playlisttxt:
                 filetxt = playlisttxt.read()
             return render_template("fileupload.html", title="File Upload", 
                                message=f"Uploaded file {file.filename} to {playlist} successfully!", filename=f"audioFiles/{playlist}/{file.filename}", filetxt=filetxt.split("\n"))
@@ -67,5 +67,5 @@ def new_playlist(playlist_name, contents=[]):
 
 @app.route("/play")
 def play():
-    files = os.listdir("audioFiles")
+    files = os.listdir("static/audioFiles")
     return render_template("play.html", title="Play", files=files)
