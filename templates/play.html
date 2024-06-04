@@ -8,10 +8,10 @@
     {% include 'navbar.html' %}
     <div id="container">
         <h1>{{ title }}</h1>
-        <audio controls>
+        <audio controls src="{{ url_for('static', filename='audioFiles/' + files[0]) }}">
             <!-- <source src="{{ url_for('static', filename='audioFiles/WTrack.mp3') }}" type="audio/mp3"> -->
             {% for file in files %}
-                <source src="{{ url_for('static', filename='audioFiles/WTrack.mp3') }}" type="audio/mp3">
+                <source src="{{ url_for('static', filename='audioFiles/' + file) }}" type="audio/mp3">
             {% endfor %}
             Your browser does not support this feature.
         </audio>
