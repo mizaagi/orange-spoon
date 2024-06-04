@@ -37,7 +37,7 @@ with open("{{playlistname}}" + ".txt", 'a') # {{playlistname}} get the playlist 
 
 @app.route("/playlists")
 def playlists():
-    return render_template("playlists.html", title="Playlists")
+    return render_template("playlists.html")
 
 def get_date():
     return datetime.now()
