@@ -2,20 +2,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='fileupload.css') }}">
+
+    <style>
+        #allSongs li:hover {
+            cursor: pointer;
+            color: blue;
+        }
+    </style>
 <body>
     {% include 'navbar.html' %}
     <div id="container">
         <h1>{{ title }}</h1>
-        <audio controls src="{{ url_for('static', filename='audioFiles/' + files[0]) }}">
-            <!-- <source src="{{ url_for('static', filename='audioFiles/WTrack.mp3') }}" type="audio/mp3"> -->
-            {% for file in files %}
-                <source src="{{ url_for('static', filename='audioFiles/' + file) }}" type="audio/mp3">
-            {% endfor %}
+        <p id="songlabel"></p>
+        <audio id="player" controls src="{{ url_for('static', filename='audioFiles/' + files[0].strip()) }}">
             Your browser does not support this feature.
         </audio>
+
+        <ol id="allSongs">
+            {% for file in files %}
+                <li data-songsrc="{{ url_for('static', filename='audioFiles/' + file.strip()) }}" data-songname="{{file}}" onclick="playSong(this)" type="audio/mp3">{{file}}</li>
+            {% endfor %}
+        </ol>
     </div>
+    <script>
+        function playSong(songLI) {
+            var song = songLI.dataset.songsrc;
+            console.log(song);
+            const player = document.getElementById('player');
+            player.src = song;
+            player.load();
+            player.play();
+            var songlabel = document.getElementById('songlabel');
+            songlabel.innerText = songLI.dataset.songname + " is playing";
+        }
+    </script>
 </body>
 
 </html>

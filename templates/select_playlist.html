@@ -1,0 +1,28 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fileupload.css') }}">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <h1>{{ title }}</h1>
+    <div id="middle">
+        <form method="POST" enctype="multipart/form-data">
+        <select id="select" name="select">
+            <option>Select Playlist</option>
+            {% for PL in playlists %}
+                <option value="{{PL}}">{{PL}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+            <input type="submit">
+        </form>
+    </div>
+</body>

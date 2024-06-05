@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/fileupload", methods=['GET', 'POST'])
 def file_upload():
     if request.method == "POST":
         playlist = "uploadedSongs" # Sets default "playlist" as a simple uploadedSongs folder, not a playlist at all
@@ -35,9 +35,9 @@ open("file.txt", 'a').write("songname.mp3")
 with open("{{playlistname}}" + ".txt", 'a') # {{playlistname}} get the playlist name from the variable assigned as such
 """
 
-@app.route("/playlists")
+@app.route("/")
 def playlists():
-    return render_template("playlists.html")
+    return render_template("index.html")
 
 def get_date():
     return datetime.now()
@@ -69,3 +69,13 @@ def new_playlist(playlist_name, contents=[]):
 def play():
     files = os.listdir("static/audioFiles")
     return render_template("play.html", title="Play", files=files)
+
+@app.route("/select", methods=['GET', 'POST'])
+def select():
+    lop = os.listdir("static/playlists")
+    if request.method == "POST":
+        playlist = request.form['select']
+        with open("static/playlists/" + playlist, "r") as f:
+            files = f.readlines()
+            return render_template("play.html", title="Play", files=files)
+    return render_template("select_playlist.html", title="Select Playlist", playlists=lop)

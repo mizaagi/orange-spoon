@@ -72,4 +72,14 @@ code {
     height: 40%;
     width: 40%;
 }
+#middle {
+    align-items: center;
+    margin-right: 50%;
+}
+#select {
+    color: black;
+}
+button {
+    color: black;
+}
 
