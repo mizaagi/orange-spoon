@@ -8,7 +8,7 @@ To run this application:
 flask --debug run
 ```
 
-Credits:
-Marlon Kohn - Backend
-Owen white - Frontend
+Credits:<br>
+Marlon Kohn - Backend<br>
+Owen white - Frontend<br>
 Ben Trumpy - Backend
