@@ -82,4 +82,8 @@ code {
 button {
     color: black;
 }
+#picture {
+    width: 50px;
+    height: 50px;
+}
 
