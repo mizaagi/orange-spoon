@@ -68,6 +68,7 @@ def new_playlist(playlist_name, contents=[]):
 @app.route("/play")
 def play():
     files = os.listdir("static/audioFiles")
+    if len(files) == 0: files.append("No playlist selected, please choose a playlist by going to the navbar and selecting 'Select'")
     return render_template("play.html", title="Play", files=files)
 
 @app.route("/select", methods=['GET', 'POST'])
