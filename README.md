@@ -10,5 +10,5 @@ flask --debug run
 
 Credits:<br>
 Marlon Kohn - Backend<br>
-Owen white - Frontend<br>
+Owen White - Frontend<br>
 Ben Trumpy - Backend
