@@ -80,3 +80,16 @@ def select():
             files = f.readlines()
             return render_template("play.html", title="Play", files=files)
     return render_template("select_playlist.html", title="Select Playlist", playlists=lop)
+
+# more vercel stuff
+
+@app.route('/', methods=['GET'])
+def home():
+    return "Homepage"
+
+@app.route('/contact', methods=['GET'])
+def contact():
+    return "Contact page"
+    
+if __name__ == "__main__":
+    app.run()
